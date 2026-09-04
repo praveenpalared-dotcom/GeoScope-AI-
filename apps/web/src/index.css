@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Premium Light Theme */
+    --background: 0 0% 98%;
+    --foreground: 230 25% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 230 25% 10%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 230 25% 10%;
+ 
+    --primary: 217 90% 50%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 220 20% 90%;
+    --secondary-foreground: 230 25% 10%;
+ 
+    --muted: 220 20% 90%;
+    --muted-foreground: 215 20% 45%;
+ 
+    --accent: 217 90% 50%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 230 20% 85%;
+    --input: 230 20% 85%;
+    --ring: 217 90% 50%;
+ 
+    --radius: 0.75rem;
+  }
+  
+  .dark {
+    /* Premium Dark Theme */
+    --background: 230 25% 4%;
+    --foreground: 210 40% 98%;
+
+    --card: 230 25% 6%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 230 25% 6%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 217 90% 55%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 220 20% 12%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 220 20% 12%;
+    --muted-foreground: 215 20% 65%;
+ 
+    --accent: 217 90% 55%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 230 20% 15%;
+    --input: 230 20% 15%;
+    --ring: 217 90% 55%;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground transition-colors duration-300 min-h-screen selection:bg-primary/30 selection:text-primary-foreground;
+  }
+  .dark body {
+    @apply bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#0d1627] via-background to-background;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-card/60 backdrop-blur-xl border border-border/50 shadow-2xl;
+  }
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.1)] dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:border-primary/30 hover:bg-card/80;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-600 dark:from-white dark:to-white/60;
+  }
+}

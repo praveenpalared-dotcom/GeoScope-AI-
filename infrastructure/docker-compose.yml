@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    # Use a PostGIS image. We will install pgvector in the initialization script if not included,
+    # or use an image that has both, e.g., ankane/pgvector (which doesn't have postgis by default).
+    # Since we need both PostGIS and pgvector, standard approach is using postgis/postgis 
+    # and installing pgvector, or using a combined image like tensorchord/pgvecto-rs or similar.
+    # We will use 'postgis/postgis:15-3.4' and configure pgvector via init script, or better, 
+    # use 'saintsjd/postgis-pgvector:15' or similar. 
+    # Let's use standard postgis and we will install pgvector via Dockerfile later if needed.
+    # For now, let's assume we use a Dockerfile or standard image.
+    # Actually, timescale/timescaledb-ha:pg15 contains PostGIS and pgvector.
+    image: timescale/timescaledb-ha:pg15
+    container_name: geoscope_db
+    environment:
+      POSTGRES_USER: geoscope_user
+      POSTGRES_PASSWORD: geoscope_password
+      POSTGRES_DB: geoscope
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+
+  minio:
+    image: minio/minio:latest
+    container_name: geoscope_minio
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+
+volumes:
+  postgres_data:
+  minio_data:
