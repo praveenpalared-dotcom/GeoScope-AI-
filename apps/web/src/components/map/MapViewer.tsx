@@ -77,8 +77,9 @@ export function MapViewer({ geoJsonUrl, geoJsonData, className = "w-full h-[600p
     })
 
     map.current.on('error', (e) => {
-      if (e.sourceId && e.sourceId.startsWith('satellite-')) {
-        console.error("Satellite tile failed:", e.sourceId, e)
+      const errorEvent = e as any;
+      if (errorEvent.sourceId && errorEvent.sourceId.startsWith('satellite-')) {
+        console.error("Satellite tile failed:", errorEvent.sourceId, e)
       }
     })
 

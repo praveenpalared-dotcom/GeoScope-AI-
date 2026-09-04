@@ -79,7 +79,7 @@ export function ReportsDashboard() {
                   paddingAngle={5}
                   dataKey="value"
                 >
-                  {classificationData.map((entry, index) => (
+                  {classificationData.map((_entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
