@@ -1,0 +1,1 @@
+-- Run this in the Supabase SQL Editor to enable required extensions`n`n-- Enable PostGIS for geospatial data`nCREATE EXTENSION IF NOT EXISTS postgis;`n`n-- Enable pgvector for embeddings and semantic search`nCREATE EXTENSION IF NOT EXISTS vector;`n`n-- Note: Alembic migrations will handle the rest of the table creations.
